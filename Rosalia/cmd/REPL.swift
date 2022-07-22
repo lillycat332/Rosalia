@@ -24,7 +24,28 @@ func handleFatal(printer: () -> String) {
 }
 
 func REPL() {
-  print("Welcome to Rosalia")
-  handleFatal(printer: { "FUCK" })
+  print("Welcome to Rosalia! Type exit or .q to leave.")
+  var running = true
+  while running {
+    print("> ", terminator: "")
+    let input = readLine()
+    if input == "exit" || input == ".q" || input == nil {
+      running = false
+    }
+    else {
+      // Because if the input is nil by this point SHTF
+      print(eval(input!))
+    }
+  }
+}
+
+func eval(_ string: String) -> Any {
+  var TokenSeq = RosaliaLexer(string: string)
+  TokenSeq.nextUntil({ $0.kind == .whitespace })
+  
+  // Lex it here...
+  // if i'm not lazy, i guess
+  
+  return TokenSeq.tokens
 }
 

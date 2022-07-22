@@ -11,19 +11,50 @@ import ArgumentParser
 var PROGRAM_STATE: ProgramState = .REPL
 
 @main struct Rosalia: ParsableCommand {
-  @Flag(help: "Whether to run a REPL or not") var repl = false
-  
-  @Argument(help: "The file to run") var file: String
-  
-  mutating func run() throws {
-    if repl {
-      PROGRAM_STATE = .REPL
+  static let configuration: CommandConfiguration = CommandConfiguration (
+    subcommands: [
+      repl.self
+    , run.self
+    , check.self
+    ]
+  )
+}
+
+extension Rosalia {
+  struct repl: ParsableCommand {
+    static var configuration: CommandConfiguration = CommandConfiguration (
+      abstract: "Experiment with Rosalia interactively"
+    , usage: """
+    Explore Rosalia, the standard library and it's type system. Use .q, ^D or exit
+    to quit, and .help for more detailed usage information.
+    """
+    )
+    
+    func run() throws {
       REPL()
     }
-    else {
-      PROGRAM_STATE = .Program
-      fatalError("Not implemented")
+  }
+  
+  struct run: ParsableCommand {
+    static var configuration: CommandConfiguration = CommandConfiguration (
+      abstract: "Run a rosalia (.rosalia, .rslia) file in the interpreter"
+    , usage: "rosalia run <file>"
+    )
+    
+    @Argument(help: """
+    The file to run.
+    """) var file: String?
+    
+    func run() {
+      Interpret(code: file!)
     }
+  }
+  
+  struct check: ParsableCommand {
+    static var configuration: CommandConfiguration = CommandConfiguration (
+      abstract: "Check, and optionally correct a rosalia file for syntax and type errors"
+    , usage: "rosalia check [--correct, -c] <file>"
+    )
   }
 }
 
