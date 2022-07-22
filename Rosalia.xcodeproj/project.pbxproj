@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB026D38288A0E9900217953 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB026D37288A0E9900217953 /* main.swift */; };
+		EB026D38288A0E9900217953 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB026D37288A0E9900217953 /* Main.swift */; };
+		EB026D43288A0FCF00217953 /* MonadicTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB026D42288A0FCF00217953 /* MonadicTypes.swift */; };
+		EB026D47288A105600217953 /* Lex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB026D46288A105600217953 /* Lex.swift */; };
+		EB026D4A288A159F00217953 /* Flexer in Frameworks */ = {isa = PBXBuildFile; productRef = EB026D49288A159F00217953 /* Flexer */; };
+		EB80A2CD288A8AD500217953 /* REPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB80A2CC288A8AD500217953 /* REPL.swift */; };
+		EB80A2D0288A8B3500217953 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB80A2CF288A8B3500217953 /* Errors.swift */; };
+		EB80A2D3288A911600217953 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = EB80A2D2288A911600217953 /* ArgumentParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +30,12 @@
 
 /* Begin PBXFileReference section */
 		EB026D34288A0E9900217953 /* Rosalia */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Rosalia; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB026D37288A0E9900217953 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		EB026D37288A0E9900217953 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		EB026D42288A0FCF00217953 /* MonadicTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadicTypes.swift; sourceTree = "<group>"; };
+		EB026D44288A101300217953 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		EB026D46288A105600217953 /* Lex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lex.swift; sourceTree = "<group>"; };
+		EB80A2CC288A8AD500217953 /* REPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPL.swift; sourceTree = "<group>"; };
+		EB80A2CF288A8B3500217953 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB80A2D3288A911600217953 /* ArgumentParser in Frameworks */,
+				EB026D4A288A159F00217953 /* Flexer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +54,7 @@
 		EB026D2B288A0E9900217953 = {
 			isa = PBXGroup;
 			children = (
+				EB026D44288A101300217953 /* LICENSE */,
 				EB026D36288A0E9900217953 /* Rosalia */,
 				EB026D35288A0E9900217953 /* Products */,
 			);
@@ -57,9 +71,29 @@
 		EB026D36288A0E9900217953 /* Rosalia */ = {
 			isa = PBXGroup;
 			children = (
-				EB026D37288A0E9900217953 /* main.swift */,
+				EB026D41288A0FB600217953 /* types */,
+				EB026D3E288A0EED00217953 /* cmd */,
+				EB026D46288A105600217953 /* Lex.swift */,
 			);
 			path = Rosalia;
+			sourceTree = "<group>";
+		};
+		EB026D3E288A0EED00217953 /* cmd */ = {
+			isa = PBXGroup;
+			children = (
+				EB026D37288A0E9900217953 /* Main.swift */,
+				EB80A2CC288A8AD500217953 /* REPL.swift */,
+			);
+			path = cmd;
+			sourceTree = "<group>";
+		};
+		EB026D41288A0FB600217953 /* types */ = {
+			isa = PBXGroup;
+			children = (
+				EB026D42288A0FCF00217953 /* MonadicTypes.swift */,
+				EB80A2CF288A8B3500217953 /* Errors.swift */,
+			);
+			path = types;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +112,10 @@
 			dependencies = (
 			);
 			name = Rosalia;
+			packageProductDependencies = (
+				EB026D49288A159F00217953 /* Flexer */,
+				EB80A2D2288A911600217953 /* ArgumentParser */,
+			);
 			productName = Rosalia;
 			productReference = EB026D34288A0E9900217953 /* Rosalia */;
 			productType = "com.apple.product-type.tool";
@@ -106,6 +144,10 @@
 				Base,
 			);
 			mainGroup = EB026D2B288A0E9900217953;
+			packageReferences = (
+				EB026D48288A159F00217953 /* XCRemoteSwiftPackageReference "Flexer" */,
+				EB80A2D1288A911600217953 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = EB026D35288A0E9900217953 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -120,7 +162,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB026D38288A0E9900217953 /* main.swift in Sources */,
+				EB80A2CD288A8AD500217953 /* REPL.swift in Sources */,
+				EB80A2D0288A8B3500217953 /* Errors.swift in Sources */,
+				EB026D47288A105600217953 /* Lex.swift in Sources */,
+				EB026D38288A0E9900217953 /* Main.swift in Sources */,
+				EB026D43288A0FCF00217953 /* MonadicTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +330,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EB026D48288A159F00217953 /* XCRemoteSwiftPackageReference "Flexer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChimeHQ/Flexer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+		EB80A2D1288A911600217953 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EB026D49288A159F00217953 /* Flexer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB026D48288A159F00217953 /* XCRemoteSwiftPackageReference "Flexer" */;
+			productName = Flexer;
+		};
+		EB80A2D2288A911600217953 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB80A2D1288A911600217953 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EB026D2C288A0E9900217953 /* Project object */;
 }
