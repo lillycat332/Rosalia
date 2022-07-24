@@ -25,7 +25,7 @@ extension Rosalia {
     static var configuration: CommandConfiguration = CommandConfiguration (
       abstract: "Experiment with Rosalia interactively"
     , usage: """
-    Explore Rosalia, the standard library and it's type system. Use .q, ^D or exit
+    Explore Rosalia, the standard library and its type system. Use .q, ^D or exit
     to quit, and .help for more detailed usage information.
     """
     )

@@ -10,11 +10,12 @@ import Flexer
 
 // These are the constant symbols used in the language
 enum RosaliaTokenKind {
-  case number
-  case whitespace
   case character
-  case word
+  case newline
+  case number
   case symbol
+  case whitespace
+  case word
 }
 
 typealias RosaliaToken = Flexer.Token<RosaliaTokenKind>
@@ -49,16 +50,25 @@ struct RosaliaTokenSequence: Sequence, IteratorProtocol, StringInitializable {
       
       return RosaliaToken(kind: .number, range: token.startIndex..<endingToken.endIndex)
       
-    case .newline, .tab, .space:
-      guard let endingToken = lexer.nextUntil(notIn: [.newline, .tab, .space])
+    case .tab, .space:
+      guard let endingToken = lexer.nextUntil(notIn: [.tab, .space])
       else {
         return nil
       }
       
       return RosaliaToken(kind: .whitespace, range: token.startIndex..<endingToken.endIndex)
       
+    case .newline:
+      guard let endingToken = lexer.nextUntil(notIn: [.newline])
+      else {
+        return nil
+      }
+      return RosaliaToken(kind: .newline, range: token.startIndex..<endingToken.endIndex)
+      
+      
     default: break
     }
+    
     guard let endingToken = lexer.nextUntil(in:[.newline, .tab, .space, .lowercaseLetter, .uppercaseLetter, .underscore, .digit])
     else {
       return nil

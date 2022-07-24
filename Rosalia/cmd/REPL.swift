@@ -24,28 +24,47 @@ func handleFatal(printer: () -> String) {
 }
 
 func REPL() {
-  print("Welcome to Rosalia! Type exit or .q to leave.")
+  print("Welcome to Rosalia! Type exit or .q to leave, or .help for help.")
   var running = true
   while running {
     print("> ", terminator: "")
     let input = readLine()
+    
     if input == "exit" || input == ".q" || input == nil {
       running = false
-    }
-    else {
+    } else if input == ".help" {
+      replhelper.help()
+    } else {
       // Because if the input is nil by this point SHTF
-      print(eval(input!))
+      print(
+        "\("\(replhelper.eval(input!))", color: .green)"
+      )
     }
+    
   }
 }
 
-func eval(_ string: String) -> Any {
-  var TokenSeq = RosaliaLexer(string: string)
-  TokenSeq.nextUntil({ $0.kind == .whitespace })
+/// replhelper enum acts as a namespace to contain helper functions for the REPL
+enum replhelper {
+  static func eval(_ string: String) -> Any {
+    var TokenSeq = RosaliaLexer(string: string)
+    let toks = TokenSeq.nextUntil(in: [.newline])
+    
+    // Lex it here...
+    // if i'm not lazy, i guess
+    
+    return toks!
+  }
   
-  // Lex it here...
-  // if i'm not lazy, i guess
-  
-  return TokenSeq.tokens
+  static func help() {
+    print(
+    """
+    Welcome to Rosalia!
+    
+    Rosalia is an interpreted, functional programming language inspired by Swift,
+    Haskell and JavaScript.
+    """)
+    let metatype = "Type: \(type(of: self))"
+    print("\(metatype, color: .blue)")
+  }
 }
-

@@ -11,6 +11,7 @@
 		EB026D43288A0FCF00217953 /* MonadicTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB026D42288A0FCF00217953 /* MonadicTypes.swift */; };
 		EB026D47288A105600217953 /* Lex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB026D46288A105600217953 /* Lex.swift */; };
 		EB026D4A288A159F00217953 /* Flexer in Frameworks */ = {isa = PBXBuildFile; productRef = EB026D49288A159F00217953 /* Flexer */; };
+		EB50F786288C5B6E00217953 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB50F785288C5B6E00217953 /* Colours.swift */; };
 		EB80A2CD288A8AD500217953 /* REPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB80A2CC288A8AD500217953 /* REPL.swift */; };
 		EB80A2D0288A8B3500217953 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB80A2CF288A8B3500217953 /* Errors.swift */; };
 		EB80A2D3288A911600217953 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = EB80A2D2288A911600217953 /* ArgumentParser */; };
@@ -35,6 +36,7 @@
 		EB026D42288A0FCF00217953 /* MonadicTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadicTypes.swift; sourceTree = "<group>"; };
 		EB026D44288A101300217953 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EB026D46288A105600217953 /* Lex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lex.swift; sourceTree = "<group>"; };
+		EB50F785288C5B6E00217953 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		EB80A2CC288A8AD500217953 /* REPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPL.swift; sourceTree = "<group>"; };
 		EB80A2CF288A8B3500217953 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		EB80A2D4288B053100217953 /* Interpreted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpreted.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				EB026D37288A0E9900217953 /* Main.swift */,
 				EB80A2CC288A8AD500217953 /* REPL.swift */,
 				EB80A2D4288B053100217953 /* Interpreted.swift */,
+				EB50F785288C5B6E00217953 /* Colours.swift */,
 			);
 			path = cmd;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB80A2CD288A8AD500217953 /* REPL.swift in Sources */,
+				EB50F786288C5B6E00217953 /* Colours.swift in Sources */,
 				EB80A2D0288A8B3500217953 /* Errors.swift in Sources */,
 				EB026D47288A105600217953 /* Lex.swift in Sources */,
 				EB026D38288A0E9900217953 /* Main.swift in Sources */,
