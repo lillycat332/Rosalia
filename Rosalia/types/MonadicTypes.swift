@@ -48,7 +48,7 @@ enum Maybe<T> {
     case .Just(let x):
       return x
     case .Nothing:
-      throw fatalError(
+      fatalError(
         """
         Unexpectedly found Nothing when attempting to unwrap value of type \
         \(type(of: self))

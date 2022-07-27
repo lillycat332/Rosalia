@@ -11,7 +11,9 @@
 		EB026D43288A0FCF00217953 /* MonadicTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB026D42288A0FCF00217953 /* MonadicTypes.swift */; };
 		EB026D47288A105600217953 /* Lex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB026D46288A105600217953 /* Lex.swift */; };
 		EB026D4A288A159F00217953 /* Flexer in Frameworks */ = {isa = PBXBuildFile; productRef = EB026D49288A159F00217953 /* Flexer */; };
+		EB04FCE428917FD300217953 /* TypeChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04FCE328917FD300217953 /* TypeChecker.swift */; };
 		EB50F786288C5B6E00217953 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB50F785288C5B6E00217953 /* Colours.swift */; };
+		EB50F789288CC73E00217953 /* LineNoise in Frameworks */ = {isa = PBXBuildFile; productRef = EB50F788288CC73E00217953 /* LineNoise */; };
 		EB80A2CD288A8AD500217953 /* REPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB80A2CC288A8AD500217953 /* REPL.swift */; };
 		EB80A2D0288A8B3500217953 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB80A2CF288A8B3500217953 /* Errors.swift */; };
 		EB80A2D3288A911600217953 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = EB80A2D2288A911600217953 /* ArgumentParser */; };
@@ -36,6 +38,7 @@
 		EB026D42288A0FCF00217953 /* MonadicTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadicTypes.swift; sourceTree = "<group>"; };
 		EB026D44288A101300217953 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EB026D46288A105600217953 /* Lex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lex.swift; sourceTree = "<group>"; };
+		EB04FCE328917FD300217953 /* TypeChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeChecker.swift; sourceTree = "<group>"; };
 		EB50F785288C5B6E00217953 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		EB80A2CC288A8AD500217953 /* REPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPL.swift; sourceTree = "<group>"; };
 		EB80A2CF288A8B3500217953 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB50F789288CC73E00217953 /* LineNoise in Frameworks */,
 				EB80A2D3288A911600217953 /* ArgumentParser in Frameworks */,
 				EB026D4A288A159F00217953 /* Flexer in Frameworks */,
 			);
@@ -78,6 +82,7 @@
 				EB026D41288A0FB600217953 /* types */,
 				EB026D3E288A0EED00217953 /* cmd */,
 				EB026D46288A105600217953 /* Lex.swift */,
+				EB04FCE328917FD300217953 /* TypeChecker.swift */,
 			);
 			path = Rosalia;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			packageProductDependencies = (
 				EB026D49288A159F00217953 /* Flexer */,
 				EB80A2D2288A911600217953 /* ArgumentParser */,
+				EB50F788288CC73E00217953 /* LineNoise */,
 			);
 			productName = Rosalia;
 			productReference = EB026D34288A0E9900217953 /* Rosalia */;
@@ -153,6 +159,7 @@
 			packageReferences = (
 				EB026D48288A159F00217953 /* XCRemoteSwiftPackageReference "Flexer" */,
 				EB80A2D1288A911600217953 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				EB50F787288CC73E00217953 /* XCRemoteSwiftPackageReference "linenoise-swift" */,
 			);
 			productRefGroup = EB026D35288A0E9900217953 /* Products */;
 			projectDirPath = "";
@@ -173,6 +180,7 @@
 				EB80A2D0288A8B3500217953 /* Errors.swift in Sources */,
 				EB026D47288A105600217953 /* Lex.swift in Sources */,
 				EB026D38288A0E9900217953 /* Main.swift in Sources */,
+				EB04FCE428917FD300217953 /* TypeChecker.swift in Sources */,
 				EB026D43288A0FCF00217953 /* MonadicTypes.swift in Sources */,
 				EB80A2D5288B053100217953 /* Interpreted.swift in Sources */,
 			);
@@ -348,6 +356,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		EB50F787288CC73E00217953 /* XCRemoteSwiftPackageReference "linenoise-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/andybest/linenoise-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 		EB80A2D1288A911600217953 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
@@ -363,6 +379,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EB026D48288A159F00217953 /* XCRemoteSwiftPackageReference "Flexer" */;
 			productName = Flexer;
+		};
+		EB50F788288CC73E00217953 /* LineNoise */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB50F787288CC73E00217953 /* XCRemoteSwiftPackageReference "linenoise-swift" */;
+			productName = LineNoise;
 		};
 		EB80A2D2288A911600217953 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;

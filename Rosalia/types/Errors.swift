@@ -10,3 +10,7 @@ import Foundation
 enum RuntimeFatalError: Error {
   case FatalOptionalUnwrap
 }
+
+enum ParseError: Error {
+  case UnexpectedToken
+}

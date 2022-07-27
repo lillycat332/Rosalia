@@ -16,6 +16,7 @@ enum RosaliaTokenKind {
   case symbol
   case whitespace
   case word
+  case string
 }
 
 typealias RosaliaToken = Flexer.Token<RosaliaTokenKind>
@@ -42,6 +43,7 @@ struct RosaliaTokenSequence: Sequence, IteratorProtocol, StringInitializable {
         return nil
       }
       return RosaliaToken(kind: .word, range: token.startIndex..<endingToken.endIndex)
+      
     case .digit:
       guard let endingToken = lexer.nextUntil({$0.kind != .digit})
       else {
@@ -65,6 +67,19 @@ struct RosaliaTokenSequence: Sequence, IteratorProtocol, StringInitializable {
       }
       return RosaliaToken(kind: .newline, range: token.startIndex..<endingToken.endIndex)
       
+    case .doubleQuote:
+      guard let endingToken = lexer.nextUntil({$0.kind == .doubleQuote && $0.endIndex > $0.startIndex})
+      else {
+        return nil
+      }
+      return RosaliaToken(kind: .string, range: token.startIndex..<endingToken.endIndex)
+    
+    case .singleQuote:
+      guard let endingToken = lexer.nextUntil(in: [.singleQuote])
+      else {
+        return nil
+      }
+      return RosaliaToken(kind: .string, range: token.startIndex..<endingToken.endIndex)
       
     default: break
     }
@@ -78,3 +93,10 @@ struct RosaliaTokenSequence: Sequence, IteratorProtocol, StringInitializable {
 }
 
 typealias RosaliaLexer = LookAheadSequence<RosaliaTokenSequence>
+
+func lex(_ string: String) throws -> RosaliaToken {
+  var TokenSeq = RosaliaLexer(string: string)
+  let toks = TokenSeq.nextUntil(in: [.newline])
+  if toks == nil { throw ParseError.UnexpectedToken }
+  return toks!
+}
