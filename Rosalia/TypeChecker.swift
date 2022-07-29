@@ -8,5 +8,5 @@
 import Foundation
 
 func TypeCheck(code: String) {
-  
+  // ...
 }

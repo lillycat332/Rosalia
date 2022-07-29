@@ -7,14 +7,12 @@
 
 import Foundation
 import ArgumentParser
-
-var PROGRAM_STATE: ProgramState = .REPL
+import Dispatch
 
 @main struct Rosalia: ParsableCommand {
   static let configuration: CommandConfiguration =
   CommandConfiguration (
-      commandName:
-      "Rosalia"
+      commandName: "Rosalia"
     , subcommands:
     [ repl.self
     , run.self
@@ -22,7 +20,7 @@ var PROGRAM_STATE: ProgramState = .REPL
     ]
     , defaultSubcommand: repl.self
   )
-  @Flag(help:"Enable !EXPERIMENTAL! features") var EXPERIMENTAL: Bool = false
+  @Flag(help:"Enable EXPERIMENTAL! features") var EXPERIMENTAL: Bool = false
 }
 
 extension Rosalia {
@@ -36,6 +34,7 @@ extension Rosalia {
     )
     
     func run() throws {
+      signal(SIGINT, SIG_IGN)
       REPL()
     }
   }
@@ -45,7 +44,7 @@ extension Rosalia {
       abstract: """
       Run a Rosalia (.rosalia, .rslia) file in the interpreter, or read from STDIN.
       """
-    , usage: "Rosalia run <file>"
+//    , usage: "Rosalia run <file>"
     )
     
     @Argument(help: "The file to run.") var file: String?

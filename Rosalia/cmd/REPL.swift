@@ -14,23 +14,13 @@ enum ProgramState {
   case Program
 }
 
-
-func handleFatal(printer: () -> String) {
-  if PROGRAM_STATE == .REPL {
-    print("Execution failed with error: \(printer()) ")
-  } else {
-    print("Unrecoverable error: \(printer())")
-    fatalError()
-  }
-}
-
 func REPL() {
-  print("Welcome to Rosalia! Type .exit or .q to leave, or .help for help.")
+  print("🌹 Welcome to Rosalia! Type .exit or .q to leave, or .help for help.")
   var running = true
   let ln = LineNoise()
   ln.setCompletionCallback { currentBuffer in
-    let completions = [
-      ".exit"
+    let completions =
+    [ ".exit"
     , ".q"
     , ".help"
     ]
@@ -40,24 +30,28 @@ func REPL() {
   
   while running {
     do {
-      let input = try ln.getLine(prompt: "> ")
-      ln.addHistory(input)
-      print("")
+//      let input = try ln.getLine(prompt: "> ")
+//      ln.addHistory(input)
       
-      if input == ".exit" || input == ".q" {
+      print("> ", terminator: "")
+      let input = readLine()
+      print("")
+      switch input {
+      case ".exit", ".q", nil:
         running = false
-      }
-      else if input == ".help" {
+      case ".help", ".h":
         ReplHelper.help()
-      }
-      else {
+      case "fuck you":
+        print("Watch your mouth!")
+        fatalError("USER_INSULTED_INTERPRETER")
+      default:
         do {
           try print(
-            "\(ReplHelper.eval(input))"
+            ReplHelper.typeColor(ReplHelper.eval(input!))
           )
         }
-        catch ParseError.UnexpectedToken {
-          print("Parse Error: Unexpected, malformed or otherwise invalid token")
+        catch {
+          print("Parse Error: \(error)")
         }
       }
     } catch LinenoiseError.EOF {
@@ -70,8 +64,14 @@ func REPL() {
 
 /// replhelper enum acts as a namespace to contain helper functions for the REPL
 enum ReplHelper {
-  static func eval(_ string: String) throws -> RosaliaToken {
-    try lex(string)
+  static func eval(_ string: String) throws -> RosaliaValue {
+    let x = try RosaliaValue(data: string)
+    return x
+  }
+  
+  // Colors a rosalia token as a type.
+  static func typeColor(_ val: RosaliaValue) -> String {
+    return "\("\(val)", color: .blue)"
   }
   
   static func help() {
