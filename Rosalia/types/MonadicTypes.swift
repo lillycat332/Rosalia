@@ -43,6 +43,8 @@ enum Maybe<T> {
   case Just(T)
   case Nothing
   
+  // Forcibly unwrap the value into a value outside the monad, of type T.
+  // In the case that it contains a value of Nothing, crash.
   @inlinable public func unwrap() throws -> T {
     switch self {
     case .Just(let x):
@@ -57,6 +59,9 @@ enum Maybe<T> {
     }
   }
   
+  // Safely unwrap the value into a value outside the monad, of type T.
+  // In the case that it contains a value of Nothing, *coalesce* it into the
+  // value of (_ value: T).
   @inlinable public func coalesce(_ value: T) -> T {
     switch self {
     case .Just(let x):
@@ -66,7 +71,9 @@ enum Maybe<T> {
     }
   }
   
-  @inlinable public func flatMap<U>(_ fn: (T) throws -> Maybe<U>) rethrows -> Maybe<U> {
+  @inlinable public func flatMap<U>(
+    _ fn: (T) throws -> Maybe<U>
+  ) rethrows -> Maybe<U> {
     switch self {
     case .Just(let x):
       return try fn(x)
@@ -75,6 +82,7 @@ enum Maybe<T> {
     }
   }
   
+  // Perform a function on the value contained with in the Maybe, returning a Maybe.
   @inlinable public func map<U>(_ fn: (T) throws -> U) rethrows -> Maybe<U> {
     switch self {
     case .Just(let x):

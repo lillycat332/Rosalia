@@ -49,7 +49,7 @@ func REPL() {
       default:
         do {
           try print(
-            ReplHelper.typeColor(ReplHelper.eval(input!))
+            ReplHelper.typeColor(eval(input!))
           )
         }
         catch {
@@ -64,11 +64,6 @@ func REPL() {
 
 /// replhelper enum acts as a namespace to contain helper functions for the REPL
 enum ReplHelper {
-  static func eval(_ string: String) throws -> RosaliaValue {
-    let x = try RosaliaValue(data: string)
-    return x
-  }
-  
   // Colors a rosalia token as a type.
   static func typeColor(_ val: RosaliaValue) -> String {
     return "\("\(val)", color: .blue)"

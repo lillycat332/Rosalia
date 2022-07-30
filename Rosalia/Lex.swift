@@ -125,3 +125,9 @@ public extension LanguageDefinition {
     return rosaDef
   }
 }
+
+// Evaluate Rosalia code and return a token.
+func eval(_ string: String) throws -> RosaliaValue {
+  let x = try RosaliaValue(data: string)
+  return x
+}
