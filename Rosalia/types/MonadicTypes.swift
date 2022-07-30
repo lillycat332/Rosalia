@@ -15,8 +15,8 @@ import Foundation
 /// ```swift
 /// func unwrap() throws -> T
 /// func coalesce(_ x: T) -> T
-/// func flatMap
-/// func map
+/// func flatMap<U>(_ fn: (T) throws -> Maybe<U>) rethrows -> Maybe<U>
+/// func map<U>(_ fn: (T) throws -> U) rethrows -> Maybe<U>
 /// ```
 /// `unwrap()` forcibly unwraps the type into a value. If it contains Nothing, a fatal error is thrown.
 ///
@@ -43,7 +43,7 @@ enum Maybe<T> {
   case Just(T)
   case Nothing
   
-  func unwrap() throws -> T {
+  @inlinable public func unwrap() throws -> T {
     switch self {
     case .Just(let x):
       return x
@@ -57,12 +57,30 @@ enum Maybe<T> {
     }
   }
   
-  func coalesce(_ value: T) -> T {
+  @inlinable public func coalesce(_ value: T) -> T {
     switch self {
     case .Just(let x):
       return x
     case .Nothing:
       return value
+    }
+  }
+  
+  @inlinable public func flatMap<U>(_ fn: (T) throws -> Maybe<U>) rethrows -> Maybe<U> {
+    switch self {
+    case .Just(let x):
+      return try fn(x)
+    case .Nothing:
+      return .Nothing
+    }
+  }
+  
+  @inlinable public func map<U>(_ fn: (T) throws -> U) rethrows -> Maybe<U> {
+    switch self {
+    case .Just(let x):
+      return .Just(try fn(x))
+    case .Nothing:
+      return .Nothing
     }
   }
 }

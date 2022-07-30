@@ -9,23 +9,24 @@ import Foundation
 import SwiftParsec
 
 
-/// The overarching type for all Rosalia tokens.
-/// cases:
+/// # RosaliaValue
+/// ## The overarching type for all Rosalia tokens.
+/// - cases:
 /// ```
 /// rlist([RosaliaValue])
 /// rfloat(Double)
 /// rstring(String)
 /// rbool(Bool)
+/// rcomment
 /// err
 /// ```
-/// methods:
+/// - methods:
 /// ```
-/// parser()
-/// init()
-///
+/// init(), which in turn calls parser
 /// ```
 ///
 public enum RosaliaValue {
+  // Here are our different types of tokens, and the error type `err`
   case rlist   (Array <RosaliaValue>)
   case rfloat  (Double)
   case rstring (String)
@@ -97,24 +98,29 @@ public enum RosaliaValue {
     return bool
   }
   
+  // Define subscript, so we can access positions of lists.
   public subscript(index: Int) -> RosaliaValue {
-    
     guard case .rlist(let list) = self, index >= 0 && index < list.count else { return .err }
-    
     return list[index]
     
   }
   
 }
 
+/// Extends the stock language definition class with our own one, RosaliaDefinition which we use
+/// to add definitions for comments, etc.
 public extension LanguageDefinition {
   static var RosaliaDefinition: LanguageDefinition {
     
+    // We inherit from the empty definition.
     var rosaDef = empty
     
     rosaDef.commentStart = "--*"
     rosaDef.commentEnd   = "*--"
     rosaDef.commentLine  = "--"
+    rosaDef.allowNestedComments = true
+    rosaDef.isCaseSensitive = true
+    rosaDef.reservedNames = [".exit", ".quit", ".q", ".help", ".h"]
     
     return rosaDef
   }
