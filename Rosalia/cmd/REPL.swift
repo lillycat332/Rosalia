@@ -7,6 +7,7 @@
 
 import LineNoise
 import Foundation
+import Dispatch
 
 /// The program state enum keeps track of whether we are in a REPL, or running a script.
 enum ProgramState {
@@ -15,7 +16,8 @@ enum ProgramState {
 }
 
 func REPL() {
-  print("🌹 Welcome to Rosalia! Type .exit or .q to leave, or .help for help.")
+  signal(SIGINT, SIG_IGN)
+  
   var running = true
   let ln = LineNoise()
   ln.setCompletionCallback { currentBuffer in
@@ -27,11 +29,11 @@ func REPL() {
     
     return completions.filter { $0.hasPrefix(currentBuffer) }
   }
-  
+    
   while running {
     do {
-//      let input = try ln.getLine(prompt: "> ")
-//      ln.addHistory(input)
+      //      let input = try ln.getLine(prompt: "> ")
+      //      ln.addHistory(input)
       
       print("> ", terminator: "")
       let input = readLine()
@@ -54,8 +56,6 @@ func REPL() {
           print("Parse Error: \(error)")
         }
       }
-    } catch LinenoiseError.EOF {
-      exit(0)
     } catch {
       print("\(error)")
     }

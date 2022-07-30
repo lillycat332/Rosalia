@@ -34,7 +34,7 @@ extension Rosalia {
     )
     
     func run() throws {
-      signal(SIGINT, SIG_IGN)
+      print("🌹 Welcome to Rosalia! Type .exit or .q to leave, or .help for help.")
       REPL()
     }
   }
@@ -44,7 +44,6 @@ extension Rosalia {
       abstract: """
       Run a Rosalia (.rosalia, .rslia) file in the interpreter, or read from STDIN.
       """
-//    , usage: "Rosalia run <file>"
     )
     
     @Argument(help: "The file to run.") var file: String?
